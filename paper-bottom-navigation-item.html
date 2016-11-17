@@ -1,4 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-behaviors/iron-button-state.html">
+<link rel="import" href="../iron-behaviors/iron-control-state.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../paper-behaviors/paper-ripple-behavior.html">
 <!--
 `paper-bottom-navigation-item`
 -->
@@ -6,7 +10,22 @@
   <template>
     <style>
        :host {
-        display: block;
+        @apply(--layout-inline);
+        @apply(--layout-center);
+        @apply(--layout-center-justified);
+        @apply(--layout-flex-auto);
+
+        position: relative;
+        padding: 0 12px;
+        overflow: hidden;
+        cursor: pointer;
+        vertical-align: middle;
+
+        @apply(--paper-bottom-navigation-item);
+      }
+
+      :host(:focus) {
+        outline: none;
       }
     </style>
     <div class="item-content">
