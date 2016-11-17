@@ -1,0 +1,29 @@
+<link rel="import" href="../polymer/polymer.html">
+<!--
+`paper-bottom-navigation-item`
+-->
+<dom-module id="paper-bottom-navigation-item">
+  <template>
+    <style>
+       :host {
+        display: block;
+      }
+    </style>
+    <div class="item-content">
+      <content></content>
+    </div>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'paper-bottom-navigation-item',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'paper-bottom-navigation-item',
+        },
+      }
+    });
+  </script>
+</dom-module>

@@ -1,34 +1,91 @@
 <link rel="import" href="../polymer/polymer.html">
-
+<link rel="import" href="../iron-menu-behavior/iron-menubar-behavior.html">
+<link rel="import" href="paper-bottom-navigation-item.html">
 <!--
-`paper-bottom-navigation`
-Material Design bottom navigation
+Material design: [Bottom Navigation](https://material.google.com/components/bottom-navigation.html)
+
+`paper-bottom-navigation` is for bottom navigarion pane with up to 5 nav items.
+
+Use `selected property to get or set the selected nav item`.
+
+Example:
+  <paper-bottom-navigation selected="0">
+    <paper-bottom-navigation-item>nav 1</paper-bottom-navigation-item>
+    <paper-bottom-navigation-item>nav 2</paper-bottom-navigation-item>
+    <paper-bottom-navigation-item>nav 3</paper-bottom-navigation-item>
+  </paper-bottom-navigation>
 
 @demo demo/index.html 
 -->
-
 <dom-module id="paper-bottom-navigation">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    <div id="itemsContainer">
+      <content select="*"></content>
+    </div>
   </template>
-
   <script>
     Polymer({
-
       is: 'paper-bottom-navigation',
+
+      behaviors: [
+        Polymer.IronMenubarBehavior
+      ],
 
       properties: {
         prop1: {
           type: String,
           value: 'paper-bottom-navigation',
         },
+
+        _previousTab: {
+          type: Object
+        }
       },
 
+      listeners: {
+        'iron-items-changed': '_onItemSizingChanged',
+        'iron-select': '_onIronSelect',
+        'iron-deselect': '_onIronDeselect'
+      },
+
+      created: function() {
+
+      },
+
+      ready: function() {
+        
+      },
+
+      _onItemSizingChanged: function() {
+        console.log('item sizing');
+      },
+
+      _onIronSelect: function(event) {
+        this._itemChanged(event.detail.item, this._previousItem);
+        this._previousItem = event.detail.item;
+        this.cancelDebouncer('item-changed');
+      },
+
+      _onIronDeselect: function(event) {
+         this.debounce('item-changed', function() {
+          this._itemChanged(null, this._previousItem);
+          this._previousItem = null;
+        }, 1);
+      },
+
+      _itemChanged: function(item, old) {
+        if (!item) {
+          return;
+        }
+
+        var oldIndex = this.items.indexOf(old);
+        var index = this.items.indexOf(item);
+      }
     });
   </script>
 </dom-module>
