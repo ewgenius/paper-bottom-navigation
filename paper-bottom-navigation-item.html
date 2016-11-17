@@ -1,8 +1,10 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-behaviors/iron-button-state.html">
 <link rel="import" href="../iron-behaviors/iron-control-state.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-behaviors/paper-ripple-behavior.html">
+<link rel="import" href="../paper-styles/default-theme.html">
 <!--
 `paper-bottom-navigation-item`
 -->
@@ -14,34 +16,80 @@
         @apply(--layout-center);
         @apply(--layout-center-justified);
         @apply(--layout-flex-auto);
-
         position: relative;
         padding: 0 12px;
         overflow: hidden;
         cursor: pointer;
         vertical-align: middle;
-
         @apply(--paper-bottom-navigation-item);
       }
-
-      :host(:focus) {
+      
+       :host(:focus) {
         outline: none;
+      }
+      
+      .item-content {
+        height: 100%;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        transition: opacity 0.1s cubic-bezier(0.4, 0.0, 1, 1);
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        @apply(--layout-flex-auto);
+        @apply(--paper-bottom-navigation-item-content);
+      }
+      
+       :host(:not(.iron-selected))>.item-content {
+        opacity: 0.8;
+        @apply(--paper-bottom-navigation-item-content-unselected);
+      }
+      
+       :host(:focus) .item-content {
+        opacity: 1;
+        font-weight: 700;
+      }
+      
+      paper-ripple {
+        color: var(--paper-bottom-navigation-item-ink, --paper-cyan-a100);
+      }
+      
+      .item-content> ::content>a {
+        @apply(--layout-flex-auto);
+        height: 100%;
       }
     </style>
     <div class="item-content">
+      <iron-icon id="icon" src="[[src]]" icon="[[icon]]" alt$="[[alt]]"></iron-icon>
       <content></content>
     </div>
   </template>
   <script>
     Polymer({
-
       is: 'paper-bottom-navigation-item',
+
+      behaviors: [
+        Polymer.IronControlState,
+        Polymer.IronButtonState,
+        Polymer.PaperRippleBehavior
+      ],
 
       properties: {
         prop1: {
           type: String,
           value: 'paper-bottom-navigation-item',
         },
+      },
+
+      listeners: {
+        down: '_updateNoink',
+        tap: '_onTap'
+      },
+
+      _updateNoink: function() {
+        //this.noink = !!this.noink || !!this._parentNoink;
+      },
+
+      _onTap: function(event) {
       }
     });
   </script>

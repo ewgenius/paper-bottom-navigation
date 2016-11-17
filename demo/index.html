@@ -8,6 +8,7 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../paper-material/paper-material.html">
   <link rel="import" href="../paper-bottom-navigation.html">
   <link rel="import" href="../paper-bottom-navigation-item.html">
   <style is="custom-style" include="demo-pages-shared-styles">
@@ -20,11 +21,15 @@
     <h3>Basic paper-bottom-navigation demo</h3>
     <demo-snippet>
       <template>
-        <paper-bottom-navigation selected="0">
-          <paper-bottom-navigation-item>nav 1</paper-bottom-navigation-item>
-          <paper-bottom-navigation-item>nav 2</paper-bottom-navigation-item>
-          <paper-bottom-navigation-item>nav 3</paper-bottom-navigation-item>
-        </paper-bottom-navigation>
+        <paper-material elevation="1">
+          <paper-bottom-navigation selected="0">
+            <paper-bottom-navigation-item>nav 1</paper-bottom-navigation-item>
+            <paper-bottom-navigation-item>nav 2</paper-bottom-navigation-item>
+            <paper-bottom-navigation-item>nav 3</paper-bottom-navigation-item>
+            <paper-bottom-navigation-item>nav 4</paper-bottom-navigation-item>
+            <paper-bottom-navigation-item>nav 5</paper-bottom-navigation-item>
+          </paper-bottom-navigation>
+        </paper-material>
       </template>
     </demo-snippet>
   </div>

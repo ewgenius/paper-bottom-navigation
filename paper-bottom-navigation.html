@@ -36,18 +36,20 @@ Example:
         -webkit-tap-highlight-color: transparent;
         @apply(--paper-bottom-navigation);
       }
-
+      
       #itemsContainer {
         position: relative;
         height: 100%;
         white-space: nowrap;
         overflow: hidden;
         @apply(--layout-flex-auto);
+        @apply(--layout-horizontal);
         @apply(--paper-bottom-navigation-container);
       }
-
-      #itemsContainer > ::content {
+      
+      #itemsContainer > ::content > * {
         height: 100%;
+        @apply(--layout-flex);
       }
     </style>
     <div id="itemsContainer">
@@ -68,13 +70,12 @@ Example:
           value: 'paper-bottom-navigation',
         },
 
-        _previousTab: {
+        _previousItem: {
           type: Object
         }
       },
 
       listeners: {
-        'iron-items-changed': '_onItemSizingChanged',
         'iron-select': '_onIronSelect',
         'iron-deselect': '_onIronDeselect'
       },
@@ -85,10 +86,6 @@ Example:
 
       ready: function() {
         
-      },
-
-      _onItemSizingChanged: function() {
-        console.log('item sizing');
       },
 
       _onIronSelect: function(event) {
